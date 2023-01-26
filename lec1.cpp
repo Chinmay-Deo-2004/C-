@@ -2,7 +2,7 @@
 using namespace std;
 
 int main(){
-    cout<<"Hello LinkedIn";
-    cout<<"Hello LinkedIn";
+    cout<<"Hello Metaverse";
+    cout<<"Hello FaceBook";
     return 0;
 }
