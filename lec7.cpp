@@ -27,7 +27,7 @@ int main(){
 
     //***********reference variables************
     float x=4.5;
-    float  &y = x;
+    float  &y = x; //y and x share the same memory location. They're one and the same now, it's just giving two names to the same mem loc.
     cout<<"value of x is: "<<x<<endl;
     cout<<"value of y is: "<<y<<endl;
     cout<<endl;
