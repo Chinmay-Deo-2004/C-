@@ -13,6 +13,7 @@ int main()
     struct student s1, s2;
     emp s3; // here instead of having to write the whole "struct student" in decln, we simply wrote it as emp using the typedef
 
+    //test comment
     s1.rollno = 1;
     s1.grade = 'A';
     s1.perc = 91.5;
