@@ -1,10 +1,14 @@
 #include<iostream>
+#include<stdlib.h>
+#include<stdio.h>
+#include<vector>
 using namespace std;
 
 int main()
 {
     //pointers in array
     int marks[4] = {23, 45, 87, 97};
+    sort(marks, 4);
     int* p = marks;
     cout<<*(p++)<<endl; //first value at p will get printed, then AFTER this line is executed, p will get incremented and in next line p will have value p=p+1.
     cout<<*p<<endl;
