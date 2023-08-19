@@ -6,6 +6,7 @@ using namespace std;
 //INSERT AT HEAD OF DLL
 //INSERT AT TAIL OF DLL
 //INSERT IN MIDDLE OF DLL
+//DELETE FROM HEAD, TAIL AND MIDDLE OF DLL
 
 class Node{
     public:
@@ -18,6 +19,17 @@ class Node{
         this -> data = d;
         this -> prev = NULL;
         this -> next = NULL;
+    }
+
+    ~Node()
+    {
+        int value = this -> data;
+        if(this -> next != NULL)
+        {
+            delete next;
+            this -> next = NULL;
+        }
+        cout<<"memory freed for element with data "<<value<<endl;
     }
 };
 
@@ -46,25 +58,42 @@ void findLength(Node* &head)
 
 void insertAtHead(Node* &head, int data)
 {
-    Node* temp = new Node(data);
-    Node* curr = head;
+    if(head == NULL)
+    {
+        Node* temp = new Node(data);
+        head = temp;
+    }
+    else
+    {
+        Node* temp = new Node(data);
+        Node* curr = head;
 
-    temp -> prev = curr -> prev;
-    temp -> next = curr;
-    curr -> prev = temp;
-    head = temp;
+        temp -> prev = curr -> prev;
+        temp -> next = curr;
+        curr -> prev = temp;
+        head = temp;
+    }
+
     
 }
 
 void insertAtTail(Node* &tail, int data)
 {
-    Node* temp = new Node(data);
-    Node* curr = tail;
+    if(tail == NULL)
+    {
+        Node* temp = new Node(data);
+        tail = temp;
+    }
+    else{
+        Node* temp = new Node(data);
+        Node* curr = tail;
 
-    temp -> next = NULL;
-    curr -> next = temp;
-    temp -> prev = curr;
-    tail = temp;
+        temp -> next = NULL;
+        curr -> next = temp;
+        temp -> prev = curr;
+        tail = temp;
+    }
+
 
 }
 
@@ -73,7 +102,7 @@ void insertAtMiddle(Node* &head, int position, int data)
     Node* temp = new Node(data);
     Node* curr = head;
     int c = 1;
-    while(c<position)
+    while(c<position-1)
     {
         curr = curr -> next;
         c++;
@@ -85,6 +114,47 @@ void insertAtMiddle(Node* &head, int position, int data)
     temp -> prev = curr;
 }
 
+void deleteAtAny(Node* &head, int position, Node* &tail)
+{
+    if(position == 1)
+    {
+        Node * temp = head;
+        head = temp -> next;
+
+        temp -> next = NULL;
+        temp -> prev = NULL;
+        delete temp;
+        return;
+    }
+
+    Node* curr = head;
+    int c=1;
+    while(c<position-1)
+    {
+        curr = curr -> next;
+        if(curr -> next -> next == NULL)
+        {
+            Node* temp = tail;
+            curr -> next = NULL;
+            tail = curr;
+
+            temp -> next = NULL;
+            temp -> prev = NULL;
+            delete temp;
+            return;
+        }
+        c++;
+    }
+
+    Node* temp = curr -> next;
+    curr -> next = curr -> next -> next;
+    curr -> next -> prev = curr;
+
+    temp -> next = NULL;
+    temp -> prev = NULL;
+    delete temp;
+
+}
 
 int main()
 {
@@ -108,6 +178,9 @@ int main()
     insertAtMiddle(head, 2, 700);
     printLL(head);
     cout<<endl;
+
+    deleteAtAny(head, 1, tail);
+    printLL(head);
 
     return 0;
 }
