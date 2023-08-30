@@ -18,7 +18,6 @@ bool reverse(string name, int n, int i)
 int main()
 {
     string name = "mommy";
-    cout<<name.length()<<endl;
 
     cout<<reverse(name, name.length()-1, 0);
     return 0;
